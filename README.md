@@ -7,4 +7,4 @@ Ruby sample application for wercker leveraging the Sinatra microframework
 
 This application uses the default [Ruby container](https://registry.hub.docker.com/u/library/ruby/) from the Docker Hub
 
-Note: this sample application only runs on the Ewok stack on wercker
+Note: this sample application only runs on the Ewok stack on wercker.
