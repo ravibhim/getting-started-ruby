@@ -4,14 +4,24 @@ dev:
     - bundle-install
     - internal/watch:
         code: |
-          bundle exec thin -R config.ru -p 8080 start
+          bundle exec thin -R config.ru -p 5000 start
         reload: true
+
 build:
     steps:
         - bundle-install
         - script:
             name: rspec
             code: bundle exec rspec
+        - script:
+            name: print env
+            code: env
+        - script:
+            name: copy files to output dir
+            code: cp -r spec $WERCKER_OUTPUT_DIR/spec
+        - internal/docker-push:
+          repository: getting-started-ruby
+          tag: my-amazing-tag
 
 feature-build:
     steps:
@@ -19,3 +29,10 @@ feature-build:
         - script:
             name: rspec
             code: bundle exec rspec
+
+
+deploy:
+  steps:
+    - internal/docker-push:
+      repository: getting-started-ruby
+      tag: my-amazing-tag
